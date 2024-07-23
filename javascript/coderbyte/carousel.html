@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<style>
+  .main_container{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: grey;
+  }
+  #carousel{
+    width:50%;
+    height:50vh;
+    display: flex;
+    background: red;
+  }
+  .carousel_item{
+    width:100%;
+    height:100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .active{
+    display:flex;
+  }
+</style>
+<body>
+<div class="main_container">
+    <div id="carousel">
+      <button id="prev"><</button>
+      <div class="carousel_item active">1st Item</div>
+      <div class="carousel_item">2nd Item</div>
+      <div class="carousel_item">3rd Item</div>
+      <button id="next">></button>
+    </div>
+</div>
+</body>
+<script>
+let carouselItemEle=document.querySelectorAll('.carousel_item');
+let prev=document.querySelector('#prev');
+let next=document.querySelector('#next');
+let currentIndex=0;
+const updateActiveItem=()=>{
+  carouselItemEle.forEach((item, index) => {
+    if (index === currentIndex) {
+        item.classList.add('active');
+    } else {
+        item.classList.remove('active');
+    }
+});
+}
+prev.addEventListener('click',()=>{
+  console.log('prev');
+  currentIndex=currentIndex > 0? currentIndex - 1 :carouselItemEle.length-1;
+  updateActiveItem()
+
+});
+next.addEventListener('click',()=>{
+  console.log('next');
+  currentIndex=currentIndex < carouselItemEle.length - 1 ? currentIndex + 1 :0;
+  updateActiveItem();
+});
+
+</script>
+</html>
